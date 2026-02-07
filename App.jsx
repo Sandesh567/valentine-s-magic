@@ -454,25 +454,7 @@ export default function App() {
               <Butterflies />
               <Sparkles count={120} scale={20} size={4} speed={0.4} opacity={0.5} color="#ffb3c1" />
             </PresentationControls>
-
-          {/* Scale-fixed Responsive Title */}
-          {/* <Html 
-            center 
-            position={[0, isMobile ? 2.5 : 5.0, 0]} 
-            transform 
-            distanceFactor={isMobile ? 15 : 10} 
-          >
-            <div 
-              className="text-center flex items-center justify-center pointer-events-none select-none"
-              style={{ 
-                width: isMobile ? '90vw' : '1000px', 
-              }}
-            >
-              <h1 className="text-3xl md:text-7xl font-cursive text-pink-600 drop-shadow-2xl leading-tight px-4 text-balance">
-                {status === 'asking' ? "Will You Be My Valentine?" : "It's a Yes! ❤️"}
-              </h1>
-            </div>
-          </Html> */}
+         
 
             {/* Buttons - Improved responsive spacing */}
             {status === 'asking' && (
@@ -488,8 +470,8 @@ export default function App() {
                       style={{ scale: yesScale }}
                       onClick={handleYes}
                       whileHover={{ scale: yesScale * 1.05 }}
-                      whileTap={{ scale: yesScale * 0.95 }}
-                      className="bg-gradient-to-br from-pink-500 to-rose-500 text-white px-8 py-3 md:px-14 md:py-6 rounded-full text-xl md:text-3xl font-bold shadow-xl border-b-4 md:border-b-8 border-rose-700 active:border-b-0 active:translate-y-1 relative"
+                      whileTap={{ scale: yesScale * 0.55 }}
+                      className="bg-gradient-to-br from-pink-500 to-rose-500 text-white px-8 py-3 md:px-14 md:py-6 rounded-full text-xl md:text-2xl font-bold shadow-xl border-b-4 md:border-b-8 border-rose-700 active:border-b-0 active:translate-y-1 relative"
                     >
                       <span className="relative z-10">Yes 💖</span>
                     </motion.button>
