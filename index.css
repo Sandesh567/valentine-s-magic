@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #fff1f2;
+}
+
+canvas {
+  touch-action: none;
+}
+
+.font-cursive {
+  font-family: 'Pacifico', cursive;
+}
