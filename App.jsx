@@ -458,19 +458,30 @@ export default function App() {
             </PresentationControls>
 
             {/* Title - Fixed relative to view, outside PresentationControls */}
-            <Html center position={[0, status === 'asking' ? (isMobile ? 4.5 : 3.8) : (isMobile ? 5.5 : 4.8), 0]}>
-              <motion.div 
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="text-center w-screen px-6 pointer-events-none select-none z-10"
+            {/* Scale-fixed Responsive Title */}
+                      {/* Scale-fixed Responsive Title */}
+            <Html 
+              center 
+              // Changed Y position from 5.5 to 3.5 to bring it closer to the heart
+              position={[0, isMobile ? 3.8 : 3.5, 0]} 
+              transform 
+              // distanceFactor helps keep the element scaled correctly within the 3D scene
+              distanceFactor={isMobile ? 10 : 8} 
+            >
+              <div 
+                className="text-center flex flex-col items-center justify-center pointer-events-none select-none"
+                style={{ 
+                  // Limits width to 90% of the screen so it doesn't touch the edges
+                  width: isMobile ? '90vw' : '1000px', 
+                  maxWidth: '100vw',
+                  // Adding top margin/padding as a safety buffer
+                  paddingTop: isMobile ? '10px' : '0px'
+                }}
               >
-                <h1 className="text-2xl md:text-8xl font-cursive text-pink-600 drop-shadow-[0_5px_15px_rgba(219,39,119,0.3)] leading-tight">
+                <h1 className="text-2xl md:text-4xl font-cursive text-pink-600 drop-shadow-2xl leading-tight px-6 text-balance">
                   {status === 'asking' ? "Will You Be My Valentine?" : "It's a Yes! ❤️"}
                 </h1>
-                <p className="text-pink-400/80 text-xs md:text-xl font-bold mt-2 md:mt-4 tracking-widest uppercase">
-                  {status === 'asking' ? "Welcome to our heart garden" : "My dream come true"}
-                </p>
-              </motion.div>
+              </div>
             </Html>
 
             {/* Buttons - Fixed relative to view, outside PresentationControls */}
