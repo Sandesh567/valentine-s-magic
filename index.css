@@ -30,9 +30,7 @@ canvas {
 }
 
 .font-cursive {
-  font-family: 'Pacifico', cursive; 
-  word-break: keep-all;
-  white-space: normal;
+  font-family: 'Pacifico', cursive;
 }
 
 /* Layout Utilities */
@@ -235,5 +233,20 @@ canvas {
 @media (max-width: 640px) {
   .font-cursive {
     font-size: clamp(2.5rem, 8vw, 4rem);
+  }
+}
+
+/* 🔥 Mobile-safe Valentine Title */
+.valentine-title {
+  font-size: clamp(1.8rem, 6vw, 4rem);
+  line-height: 1.15;
+  padding: 0 1rem;
+  text-wrap: balance;
+}
+
+/* Extra small devices */
+@media (max-width: 360px) {
+  .valentine-title {
+    font-size: 1.6rem;
   }
 }

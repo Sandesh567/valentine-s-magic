@@ -1,4 +1,3 @@
-
 import React, { useState, useMemo, useRef, Suspense, createContext, useContext, useEffect } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { 
@@ -420,12 +419,11 @@ export default function App() {
 
   return (
   <div className="h-screen w-screen bg-[#fff1f2] relative overflow-hidden flex flex-col items-center justify-center">
-      {/* UPDATE: src points to the file in your public folder */}
       <audio ref={audioRef} loop src="/song.mp3" />
       
       <div className="absolute top-4 right-4 z-[100]">
-        <button onClick={toggleMusic} className="p-4 bg-white/70 backdrop-blur-md rounded-full shadow-lg">
-          {isPlaying ? <Music className="text-pink-600 animate-pulse" /> : <Music2 className="text-gray-400" />}
+        <button onClick={toggleMusic} className="p-3 md:p-4 bg-white/70 backdrop-blur-md rounded-full shadow-lg">
+          {isPlaying ? <Music className="w-5 h-5 md:w-6 md:h-6 text-pink-600 animate-pulse" /> : <Music2 className="w-5 h-5 md:w-6 md:h-6 text-gray-400" />}
         </button>
       </div>
 
@@ -433,7 +431,7 @@ export default function App() {
         <Canvas 
           camera={{ 
             position: [0, 0, isMobile ? 12 : 8], 
-            fov: isMobile ? 45 : 45 
+            fov: isMobile ? 50 : 45 
           }} 
           dpr={[1, 2]}
         >
@@ -450,7 +448,7 @@ export default function App() {
               polar={[-Math.PI / 6, Math.PI / 6]}
               azimuth={[-Math.PI / 4, Math.PI / 4]}
             >
-              <MainHeart status={status} scale={status === 'accepted' ? (isMobile ? 1.6 : 1.4) : (isMobile ? 0.8 : 0.75)} />
+              <MainHeart status={status} scale={status === 'accepted' ? (isMobile ? 1.4 : 1.4) : (isMobile ? 0.7 : 0.75)} />
               <CursorHearts />
               <Garden />
               <Butterflies />
@@ -458,36 +456,40 @@ export default function App() {
             </PresentationControls>
 
           {/* Scale-fixed Responsive Title */}
-          <Html 
+          {/* <Html 
             center 
-            position={[0, isMobile ? 3.5 : 5.5, 0]} 
+            position={[0, isMobile ? 2.5 : 5.0, 0]} 
             transform 
-            distanceFactor={isMobile ? 12 : 10} 
+            distanceFactor={isMobile ? 15 : 10} 
           >
             <div 
               className="text-center flex items-center justify-center pointer-events-none select-none"
               style={{ 
-                width: isMobile ? '85vw' : '1000px', 
-                maxWidth: '80vw' 
+                width: isMobile ? '90vw' : '1000px', 
               }}
             >
-              <h1 className="text-xl md:text-2xl font-cursive text-pink-600 drop-shadow-2xl leading-tight px-4">
+              <h1 className="text-3xl md:text-7xl font-cursive text-pink-600 drop-shadow-2xl leading-tight px-4 text-balance">
                 {status === 'asking' ? "Will You Be My Valentine?" : "It's a Yes! ❤️"}
               </h1>
             </div>
-          </Html>
+          </Html> */}
 
-            {/* Buttons - Fixed relative to view, outside PresentationControls */}
+            {/* Buttons - Improved responsive spacing */}
             {status === 'asking' && (
-              <Html center position={[0, isMobile ? -3.5 : -2.8, 0]}>
+              <Html center 
+              position={[0, isMobile ? -3.2 : -2.8, 0]} 
+              transform 
+              distanceFactor={isMobile ? 12 : 10}
+              style={{ display: showLetter ? 'none' : 'block' }}
+              >
                 <div className="flex flex-col items-center gap-6 md:gap-12 w-screen px-4">
-                  <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-10">
+                  <div className={`flex ${isMobile ? 'flex-col' : 'flex-row'} items-center justify-center gap-4 md:gap-10`}>
                     <motion.button
                       style={{ scale: yesScale }}
                       onClick={handleYes}
                       whileHover={{ scale: yesScale * 1.05 }}
                       whileTap={{ scale: yesScale * 0.95 }}
-                      className="bg-gradient-to-br from-pink-500 to-rose-500 text-pink px-8 py-3 md:px-14 md:py-6 rounded-full text-xl md:text-3xl font-bold shadow-xl border-b-4 md:border-b-8 border-rose-700 active:border-b-0 active:translate-y-1 relative"
+                      className="bg-gradient-to-br from-pink-500 to-rose-500 text-white px-8 py-3 md:px-14 md:py-6 rounded-full text-xl md:text-3xl font-bold shadow-xl border-b-4 md:border-b-8 border-rose-700 active:border-b-0 active:translate-y-1 relative"
                     >
                       <span className="relative z-10">Yes 💖</span>
                     </motion.button>
@@ -496,7 +498,7 @@ export default function App() {
                       animate={{ x: noButtonPos.x, y: noButtonPos.y }}
                       onMouseEnter={!isMobile ? handleNo : undefined}
                       onClick={handleNo}
-                      className="bg-/90 backdrop-blur-md text-gray-400 px-6 py-3 md:px-8 md:py-4 rounded-full text-lg md:text-xl font-bold shadow-lg border border-white hover:text-gray-600 transition-all whitespace-nowrap"
+                      className="bg-white/80 backdrop-blur-md text-gray-500 px-6 py-3 md:px-8 md:py-4 rounded-full text-lg md:text-xl font-bold shadow-lg border border-white hover:text-gray-700 transition-all whitespace-nowrap"
                     >
                       {rejectionCount === 0 ? "No 🙃" : REJECTION_MESSAGES[rejectionCount]}
                     </motion.button>
@@ -518,7 +520,7 @@ export default function App() {
       initial={{ opacity: 0, scale: 0.5, y: 100 }}
       animate={{ opacity: 1, scale: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.8 }}
-      className="bg-[#fff9f0] w-full max-w-lg rounded-[1.5rem] md:rounded-[2rem] shadow-2xl border-[6px] md:border-[12px] border-white overflow-hidden relative max-h-[90vh] flex flex-col"
+      className="bg-[#fff9f0] w-full max-w-lg rounded-[1.5rem] md:rounded-[2rem] shadow-2xl border-[6px] md:border-[12px] border-white overflow-hidden relative max-h-[85vh] flex flex-col"
     >
       {/* Close Button */}
       <button 
@@ -536,14 +538,14 @@ export default function App() {
           </div>
         </div>
 
-        <h2 className="text-3xl md:text-4xl font-cursive text-pink-700 mb-4 md:mb-6">To My Dear Valentine...</h2>
+        <h2 className="text-2xl md:text-4xl font-cursive text-pink-700 mb-4 md:mb-6">To My Dear Valentine...</h2>
         
         <div className="text-pink-600/80 text-sm md:text-lg leading-relaxed font-medium">
           <p className="mb-2">You’ve just made me the luckiest person in the world! 🌎</p>
-          <p className="mb-6">In this garden of life, you're the most beautiful flower. Here's why you're so special:</p>
+          <p className="mb-6 px-2">In this garden of life, you're the most beautiful flower. Here's why you're so special:</p>
           
           {/* Fixed List: Line by Line */}
-          <div className="flex flex-col gap-3 mt-4 max-w-md mx-auto">
+          <div className="flex flex-col gap-3 mt-4 max-w-md mx-auto px-2">
             {WHOLESOME_REASONS.map((reason, idx) => (
               <motion.div 
                 key={idx}
@@ -559,7 +561,7 @@ export default function App() {
           </div>
         </div>
 
-        <div className="mt-10 pt-6 border-t border-pink-100 italic text-pink-400 text-sm md:text-base">
+        <div className="mt-10 pt-6 border-t border-pink-100 italic text-pink-400 text-sm md:text-base mb-4">
           "Forever yours, with all my heart. 💌"
         </div>
       </div>
@@ -571,8 +573,6 @@ export default function App() {
 )}
       </AnimatePresence>
 
-      
-
       <style dangerouslySetInnerHTML={{ __html: `
         @keyframes spin-slow {
           from { transform: rotate(0deg); }
@@ -583,6 +583,19 @@ export default function App() {
         }
         .font-cursive {
           font-family: 'Pacifico', cursive;
+        }
+        .text-balance {
+          text-wrap: balance;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+          width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+          background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+          background: #fbcfe8;
+          border-radius: 10px;
         }
       ` }} />
     </div>
