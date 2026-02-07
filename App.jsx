@@ -457,32 +457,25 @@ export default function App() {
               <Sparkles count={120} scale={20} size={4} speed={0.4} opacity={0.5} color="#ffb3c1" />
             </PresentationControls>
 
-            {/* Title - Fixed relative to view, outside PresentationControls */}
-            {/* Scale-fixed Responsive Title */}
-                      {/* Scale-fixed Responsive Title */}
-            <Html 
-              center 
-              // Changed Y position from 5.5 to 3.5 to bring it closer to the heart
-              position={[0, isMobile ? 3.8 : 3.5, 0]} 
-              transform 
-              // distanceFactor helps keep the element scaled correctly within the 3D scene
-              distanceFactor={isMobile ? 10 : 8} 
+          {/* Scale-fixed Responsive Title */}
+          <Html 
+            center 
+            position={[0, isMobile ? 3.5 : 5.5, 0]} 
+            transform 
+            distanceFactor={isMobile ? 12 : 10} 
+          >
+            <div 
+              className="text-center flex items-center justify-center pointer-events-none select-none"
+              style={{ 
+                width: isMobile ? '85vw' : '1000px', 
+                maxWidth: '80vw' 
+              }}
             >
-              <div 
-                className="text-center flex flex-col items-center justify-center pointer-events-none select-none"
-                style={{ 
-                  // Limits width to 90% of the screen so it doesn't touch the edges
-                  width: isMobile ? '90vw' : '1000px', 
-                  maxWidth: '100vw',
-                  // Adding top margin/padding as a safety buffer
-                  paddingTop: isMobile ? '10px' : '0px'
-                }}
-              >
-                <h1 className="text-2xl md:text-4xl font-cursive text-pink-600 drop-shadow-2xl leading-tight px-6 text-balance">
-                  {status === 'asking' ? "Will You Be My Valentine?" : "It's a Yes! ❤️"}
-                </h1>
-              </div>
-            </Html>
+              <h1 className="text-xl md:text-2xl font-cursive text-pink-600 drop-shadow-2xl leading-tight px-4">
+                {status === 'asking' ? "Will You Be My Valentine?" : "It's a Yes! ❤️"}
+              </h1>
+            </div>
+          </Html>
 
             {/* Buttons - Fixed relative to view, outside PresentationControls */}
             {status === 'asking' && (

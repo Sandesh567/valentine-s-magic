@@ -30,7 +30,9 @@ canvas {
 }
 
 .font-cursive {
-  font-family: 'Pacifico', cursive;
+  font-family: 'Pacifico', cursive; 
+  word-break: keep-all;
+  white-space: normal;
 }
 
 /* Layout Utilities */
